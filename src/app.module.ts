@@ -4,6 +4,7 @@ import { AppService } from "./app.service";
 import { ConfigModule } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ProductModule } from "./product/product.module";
+import { ThrottlerModule } from "@nestjs/throttler";
 
 @Module({
     imports: [
@@ -18,7 +19,8 @@ import { ProductModule } from "./product/product.module";
             entities: [__dirname + "/**/*.entity{.ts,.js}"],
             synchronize: process.env.DB_SYNCHRONIZE === "true"
         }),
-        ProductModule
+        ProductModule,
+        ThrottlerModule.forRoot({ ttl: 60, limit: 10 })
     ],
     controllers: [AppController],
     providers: [AppService]
