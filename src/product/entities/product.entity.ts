@@ -17,8 +17,8 @@ export class Product extends BaseEntity {
     @Column({ name: "condition", type: "varchar", length: 50 })
     condition: string;
 
-    @Column({ name: "description", type: "varchar", length: 255 })
-    description: string;
+    @Column({ name: "description", type: "varchar", nullable: true, length: 255 })
+    description?: string;
 
     @CreateDateColumn({ name: "created_at", type: "timestamptz", default: () => "CURRENT_TIMESTAMP" })
     createdAt: Date;
